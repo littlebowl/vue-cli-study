@@ -10,7 +10,10 @@
 </template>
 
 <script>
-import {Message} from './plugins/message.js'
+import Vue from 'vue'
+// import {Message} from './plugins/message.js' //方法一：解构的方式
+import Message from './plugins/message.js' //方法一：use
+Vue.use(Message,{}) //使用一个插件，内部需要提供一个install方法
 export default{
   data(){
     return{
@@ -19,9 +22,15 @@ export default{
   },
   methods: {
     showMessage(){
-      Message.info({
+      // // 方法一
+      // Message.info({
+      //   message:'啦啦啦啦',
+      //   duration: 3000
+      // })
+      //方法二
+      this.$xrmessage.info({
         message:'啦啦啦啦',
-        duration: 1000
+        duration: 3000
       })
     }
   },

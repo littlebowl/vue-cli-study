@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import MessageComponent from './MessageComponent.vue'
+import M from 'minimatch'
 //获得组件的一个实例
 let getInstance = ()=>{
   //创建一个组件的实例，追加到全局dom中
@@ -26,9 +27,27 @@ const Message = {
   info(data){
     console.log('message',data)
     getSingleIns().add(data)
+  },
+  success(){
+
   }
 }
 
 export{
   Message
+}
+
+let _Vue
+export default {//写插件的原理
+  //默认两个参数，第二个参数是use时候的传参
+  install(Vue,options){
+    if(!_Vue){//防止多次use
+      _Vue = Vue 
+      let $message = {}
+      Object.keys(Message).forEach(type =>{
+        $message[type] = Message[type]
+      })
+      Vue.prototype.$xrmessage = $message
+    }
+  }
 }
