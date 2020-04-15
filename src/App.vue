@@ -4,9 +4,29 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <button @click="showMessage">点我啊</button>
     <router-view/>
   </div>
 </template>
+
+<script>
+import {Message} from './plugins/message.js'
+export default{
+  data(){
+    return{
+
+    }
+  },
+  methods: {
+    showMessage(){
+      Message.info({
+        message:'啦啦啦啦',
+        duration: 1000
+      })
+    }
+  },
+}
+</script>
 
 <style>
 #app {
